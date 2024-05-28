@@ -66,12 +66,10 @@ class MoviesController {
                     "movies_notes.user_id"
                 ])
                 .where("movies_notes.user_id", user_id)
-                .whereLike("movies_notes.title", `&${title}&`)
+                .whereLike("movies_notes.title", `%${title}%`)
                 .whereIn("tags.name", filterTags)
                 .innerJoin("movies_notes", "movies_notes.id", "tags.movie_notes_id")
                 .orderBy("movies_notes.title")
-
-                console.log(movies);
 
                 return response.json(movies)
         }
